@@ -2,7 +2,7 @@ import ProductPreview from "@/components/ProductCard/ProductPreview"
 import SectionBase from "@/components/SectionBase"
 import Product from "@/tools/Models/Product"
 
-export default async function Page({ params }:{ params:{ category:string }}) {
+export default async function Page({ params }:{ params:Promise<{ category:string }> }) {
     const { category } = await params
     const products = (new Product).get({ category })
 

@@ -6,7 +6,7 @@ import Details from "@/components/ProductDetail/Details"
 import { redirect } from "next/navigation"
 import Product from "@/tools/Models/Product"
 
-export default async function Page({ params }:{ params:{ slug:string } }) {
+export default async function Page({ params }:{ params:Promise<{ slug:string }> }) {
     const { slug } = await params
     const product = (new Product()).get().find( product => product.href.replace("/product/","").replace("/","") === slug  ) as typeProduct
 
