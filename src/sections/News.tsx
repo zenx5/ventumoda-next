@@ -1,8 +1,9 @@
 import ProductPreview from "@/components/ProductCard/ProductPreview"
 import SectionBase from "@/components/SectionBase"
-import { products } from "@/tools/constant"
+import Product from "@/tools/Models/Product"
 
 export default function News() {
+    const products = (new Product()).get()
 
     return <SectionBase>
         <h2 className="text-2xl uppercase font-bold text-center">Novedades</h2>

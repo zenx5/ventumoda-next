@@ -1,13 +1,14 @@
 import Image from "next/image"
 import SectionBase from "@/components/SectionBase"
-import { products, currencies } from "@/tools/constant"
+import { currencies } from "@/tools/constant"
 import product2 from "@/assets/product2.jpg"
 import Details from "@/components/ProductDetail/Details"
 import { redirect } from "next/navigation"
+import Product from "@/tools/Models/Product"
 
 export default async function Page({ params }:{ params:{ slug:string } }) {
     const { slug } = await params
-    const product = products.find( product => product.href.replace("/product/","").replace("/","") === slug  ) as typeProduct
+    const product = (new Product()).get().find( product => product.href.replace("/product/","").replace("/","") === slug  ) as typeProduct
 
     if( !product ) redirect("/")
 

@@ -3,9 +3,10 @@ import ProductPreview from "@/components/ProductCard/ProductPreview"
 import male from "@/assets/male.jpg"
 import female from "@/assets/female.jpg"
 import SectionBase from "@/components/SectionBase"
-import { products } from "@/tools/constant"
+import Product from "@/tools/Models/Product"
 
 export default function MaleFemale() {
+    const products = (new Product()).get()
 
     return <SectionBase className="flex flex-col gap-2 ">
         <h2 className="text-2xl uppercase font-bold text-center mb-8">Damas y Caballeros</h2>

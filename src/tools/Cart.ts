@@ -16,7 +16,7 @@ export default class Cart {
             const tempCart = window.localStorage.getItem('temp_cart') as string
             return JSON.parse( tempCart ) || cartBlank
         } catch(e) {
-            console.log(e.message as string)
+            console.log(e)
             return cartBlank
         }
     }
@@ -26,7 +26,7 @@ export default class Cart {
             if (typeof window === 'undefined')  throw new Error("Window not defined")
             window.localStorage.setItem('temp_cart', JSON.stringify(cart) )
         } catch (e) {
-            console.log(e.message as string)
+            console.log(e)
         }
     }
 
@@ -68,6 +68,11 @@ export default class Cart {
         this.set(cart)
     }
 
+    static getTotal() {
+        const { quantity } = this.get()
+        return quantity.reduce( (acc:number, qty:number) => acc + qty, 0)
+    }
+
     static clear() {
         try{
             if (typeof window === 'undefined')  throw new Error("Window not defined")
@@ -76,7 +81,7 @@ export default class Cart {
                 quantity: []
             }))
         } catch (e) {
-            console.log(e.message as string)
+            console.log(e)
         }
     }
 }
