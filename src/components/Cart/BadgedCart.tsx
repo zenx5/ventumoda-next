@@ -1,20 +1,14 @@
 "use client"
-
-import Cart from "@/tools/Cart"
-import Product from "@/tools/Models/Product"
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-
-type typeProductQuantifiable = typeProduct & {
-    quantity:number
-}
+import ListProduct from "./ListProduct"
+import useProductCart from "@/tools/useProductCart"
 
 export default function BadgedCart() {
     const pathname = usePathname()
     const [open, setOpen] = useState(false)
-    const [quantity, setQuantity] = useState(0)
-    const [products, setProducts ] = useState<typeProductQuantifiable[]>([])
+    const { quantity, products } = useProductCart()
 
     useEffect(()=>{
         const disableScroll = () => window.scrollTo(0,0)
@@ -23,32 +17,10 @@ export default function BadgedCart() {
         return () => window.removeEventListener('scroll', disableScroll)
     },[open])
 
-    useEffect(()=>{
-        const id = setInterval(()=>{
-            setQuantity( Cart.getTotal() )
-        }, 500)
-        return ()=>clearInterval(id)
-    },[])
-
-    useEffect(()=>{
-        const cart = Cart.get()
-        const data = (new Product).get().map( (product:typeProduct) => {
-            const index = cart.index.indexOf( product.id )
-            if( index===-1 ) return null
-            return {
-                ...product,
-                quantity: cart.quantity[ index ]
-            }
-        } ) as typeProductQuantifiable[]
-        console.log( data?.filter( item => item!==null ) )
-        setProducts( data?.filter( item => item!==null ) )
-    },[quantity])
-
     const getTotal = () => {
         return products.reduce( (acc, item)=>{
             return acc + Number( item.price.slice(1) ) * item.quantity
         },0)
-
     }
 
     const disabled = pathname==='/pagar'
@@ -63,7 +35,7 @@ export default function BadgedCart() {
             {quantity>0 && <BadgedNumber value={quantity} disabled={disabled} />}
         </button>
         { ( !disabled && open) && <div className="w-screen h-screen absolute top-0 left-0 z-20 bg-slate-50 opacity-80 blur"/>}
-        { ( !disabled && open) && <div className="absolute bg-white w-80 h-screen top-0 right-0 z-30 py-1 px-4 shadow">
+        { ( !disabled && open) && <div className="absolute bg-white w-1/3 h-screen top-0 right-0 z-30 py-1 px-4 shadow">
             <div className="flex flex-row justify-end mt-4 h-[5%]">
                 <button onClick={()=>setOpen(false)}>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
@@ -77,15 +49,7 @@ export default function BadgedCart() {
                         <h2 className="font-bold text-xl">Carrito</h2>
                         <span className="font-bold text-xl">{ getTotal() }</span>
                     </span>
-                    <ul className="divide-y">
-                        { products.map( product => <li key={product.id}>
-                            <span className="flex flex-row justify-between py-4 px-4 text-sm">
-                                <span>{ product.title }</span>
-                                <span>{ product.quantity }</span>
-                                <span>{ product.price }</span>
-                            </span>
-                        </li> )}
-                    </ul>
+                    <ListProduct products={products} />
                 </span>
                 <div className="px-4">
                     <Link href="/pagar" className="block text-center bg-green-500 text-white py-2 px-8 w-full rounded">Pagar</Link>

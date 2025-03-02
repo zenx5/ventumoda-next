@@ -8,3 +8,7 @@ type typeProduct = {
     content:    string
     excerpt:    string
 }
+
+type typeProductQuantifiable = typeProduct & {
+    quantity:number
+}
