@@ -12,3 +12,21 @@ type typeProduct = {
 type typeProductQuantifiable = typeProduct & {
     quantity:number
 }
+
+type typeClient = {
+    id:         number
+    name:       string
+    email:      string
+    phone:      string
+    address:    string
+}
+
+type typeInvoices = {
+    id:             number
+    description:    string
+    client:         typeClient
+    products:       typeProductQuantifiable[]
+    paymentMethod:  string
+    paymentDetails: string
+    total:          number
+}

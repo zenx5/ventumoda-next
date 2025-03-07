@@ -1,9 +1,9 @@
 import Image from "next/image"
-import ProductPreview from "@/components/ProductCard/ProductPreview"
 import male from "@/assets/male.jpg"
 import female from "@/assets/female.jpg"
 import SectionBase from "@/components/SectionBase"
 import Product from "@/tools/Models/Product"
+import ProductList from "@/components/ProductCard/ProductList"
 
 export default function MaleFemale() {
     const products = (new Product()).get()
@@ -14,10 +14,6 @@ export default function MaleFemale() {
             <Image src={female} alt="female" className="col-span-1"/>
             <Image src={male} alt="male" className="col-span-1"/>
         </div>
-        <span className="grid grid-cols-4 gap-10 my-4">
-            { products.slice(0,4).map( product => <span className="col-span-1" key={product.id}>
-                <ProductPreview productId={product.id} {...product}/>
-            </span>) }
-        </span>
+        <ProductList products={products.slice(0,4)} />
     </SectionBase>
 }
