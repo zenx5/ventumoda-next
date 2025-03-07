@@ -1,3 +1,4 @@
+import RowProduct from "./RowProduct";
 
 export default async function Page() {
   const products:typeProductQuantifiable[] = []
@@ -21,18 +22,7 @@ export default async function Page() {
               </tr>
           </thead>
           <tbody>
-              { products.map( product => <tr key={product.id}>
-                  <td>{ product.id }</td>
-                  <td>
-                    <span>
-                      <span>{ product.title }</span>
-                      <span>{ product.slug }</span>
-                    </span>
-                  </td>
-                  <td>{ product.content.substring(0,10) }</td>
-                  <td>{ product.quantity }</td>
-                  <td>{ product.price }</td>
-              </tr>)}
+              { products.map( product => <RowProduct key={product.id} product={product} /> )}
           </tbody>
       </table>
       </div>

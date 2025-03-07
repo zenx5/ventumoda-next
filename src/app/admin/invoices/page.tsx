@@ -1,3 +1,5 @@
+import RowInvoice from "./RowInvoice";
+
 export default async function Page() {
     const invoices:typeInvoices[] = []
 
@@ -19,14 +21,7 @@ export default async function Page() {
                     </tr>
                 </thead>
                 <tbody>
-                    { invoices.map( invoice => <tr key={invoice.id}>
-                        <td>{ invoice.id }</td>
-                        <td>{ invoice.description }</td>
-                        <td>{ invoice.client.name }</td>
-                        <td>{ invoice.paymentMethod }</td>
-                        <td>{ invoice.products.length }</td>
-                        <td>{ invoice.total }</td>
-                    </tr>)}
+                    { invoices.map( invoice => <RowInvoice key={invoice.id} invoice={invoice} /> )}
                 </tbody>
             </table>
         </div>
