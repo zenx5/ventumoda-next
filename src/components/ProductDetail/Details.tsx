@@ -17,7 +17,7 @@ export default function Details({ currencies, product }:typeDetailsProps) {
         <span className="w-1/4">
             <Select items={currencies}/>
         </span>
-        <div dangerouslySetInnerHTML={{ __html: product?.excerpt }} className="text-lg"/>
+        <div dangerouslySetInnerHTML={{ __html: product?.excerpt ?? '' }} className="text-lg"/>
         <AddToCart productId={product.id}/>
     </div>
 }

@@ -1,6 +1,7 @@
 type typeProduct = {
-    id:         number
-    price:      string
+    id:         string
+    price:      number
+    currency:   string
     slug:       string
     status:     string
     href:       string

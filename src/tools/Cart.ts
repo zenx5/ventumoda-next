@@ -30,18 +30,18 @@ export default class Cart {
         }
     }
 
-    static is( item:number ) {
+    static is( item:string ) {
         const cart = this.get()
         return cart.index.indexOf( item )
     }
 
-    static quantity( item:number ) {
+    static quantity( item:string ) {
         const cart = this.get()
         const index = cart.index.indexOf( item )
         return index!=-1 ? cart.quantity[index] : 0
     }
 
-    static add( item:number, quantity:number = 1 ) {
+    static add( item:string, quantity:number = 1 ) {
         const cart = this.get()
         const index = this.is(item)
         if ( index==-1 ) {
@@ -53,7 +53,7 @@ export default class Cart {
         this.set(cart)
     }
 
-    static remove( item:number, quantityToRemove:number = 1 ) {
+    static remove( item:string, quantityToRemove:number = 1 ) {
         const cart = this.get()
         const index = this.is(item)
         if ( index!=-1 ) {

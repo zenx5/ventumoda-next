@@ -14,20 +14,23 @@ export default function useProductCart() {
     },[])
 
     useEffect(()=>{
-        const cart = Cart.get()
-        const data = (new Product).get().map( (product:typeProduct) => {
-            const index = cart.index.indexOf( product.id )
-            if( index===-1 ) return null
-            return {
-                ...product,
-                quantity: cart.quantity[ index ]
-            }
-        } ) as typeProductQuantifiable[]
-        setProducts( data?.filter( item => item!==null ) )
+        (async () => {
+            const cart = Cart.get()
+            const data = (await Product.get()).map( (product:typeProduct) => {
+                const index = cart.index.indexOf( product.id )
+                if( index===-1 ) return null
+                return {
+                    ...product,
+                    quantity: cart.quantity[ index ]
+                }
+            } ) as typeProductQuantifiable[]
+            setProducts( data?.filter( item => item!==null ) )
+
+        })();
     },[quantity])
 
     const total = products.reduce( (acc, item) => {
-        return acc + Number( item.price.slice(1) ) * item.quantity
+        return acc + item.price * item.quantity
     },0)
 
     return { products, quantity, total }

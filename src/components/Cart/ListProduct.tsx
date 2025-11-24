@@ -16,7 +16,7 @@ export default function ListProduct({ products = [] }:ListProductProps) {
             <span className="grid grid-cols-3 py-4 px-4">
                 <span className="col-span-1 text-lg ">{ product.title }</span>
                 <span className="col-span-1 text-lg text-center">{ product.quantity }</span>
-                <span className="col-span-1 text-lg text-center">{ product.price }</span>
+                <span className="col-span-1 text-lg text-center">{ product.price }{ product.currency }</span>
             </span>
         </li> )}
     </ul>

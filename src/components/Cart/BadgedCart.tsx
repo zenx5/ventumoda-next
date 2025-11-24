@@ -19,7 +19,7 @@ export default function BadgedCart() {
 
     const getTotal = () => {
         return products.reduce( (acc, item)=>{
-            return acc + Number( item.price.slice(1) ) * item.quantity
+            return acc + item.price * item.quantity
         },0)
     }
 

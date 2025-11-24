@@ -8,8 +8,8 @@ import Product from "@/tools/Models/Product"
 
 export default async function Page({ params }:{ params:Promise<{ slug:string }> }) {
     const { slug } = await params
-    const product = (new Product()).get().find( product => product.href.replace("/product/","").replace("/","") === slug  ) as typeProduct
-
+    const product = (await Product.getAll()).find( product => product.href.replace("/product/","").replace("/","") === slug  ) as typeProduct
+    
     if( !product ) redirect("/")
 
     return <main className="my-10">

@@ -4,7 +4,7 @@ import Cart from "@/tools/Cart"
 import Link from "next/link"
 import { useState } from "react"
 
-export default function AddToCart({ productId }:{ productId:number }) {
+export default function AddToCart({ productId }:{ productId:string }) {
     const [quantity, setQuantity] = useState(1)
 
     const handleClick = () => {

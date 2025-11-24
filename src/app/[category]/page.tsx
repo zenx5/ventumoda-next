@@ -4,7 +4,7 @@ import Product from "@/tools/Models/Product"
 
 export default async function Page({ params }:{ params:Promise<{ category:string }> }) {
     const { category } = await params
-    const products = (new Product).get({ category })
+    const products = await Product.getByCategory([category])
 
     return <SectionBase>
         <div>
