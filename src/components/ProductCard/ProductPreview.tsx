@@ -5,7 +5,8 @@ import AddToCart from "./AddToCart"
 
 type typeProductPreview = {
     productId:  string
-    price:      string
+    price:      number
+    currency:   string
     slug:       string
     status:     string
     href:       string
