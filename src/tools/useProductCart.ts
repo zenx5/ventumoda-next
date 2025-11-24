@@ -16,7 +16,7 @@ export default function useProductCart() {
     useEffect(()=>{
         (async () => {
             const cart = Cart.get()
-            const data = (await Product.get()).map( (product:typeProduct) => {
+            const data = (await Product.getAll()).map( (product:typeProduct) => {
                 const index = cart.index.indexOf( product.id )
                 if( index===-1 ) return null
                 return {
